@@ -6,62 +6,62 @@ import { ImageSkeleton } from './ImageSkeleton'
 
 const galleryImages = [
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.24.50 PM.jpeg',
+        src: '/assets/gallery_image_0.jpeg',
         alt: 'Alfajores de Maicena artesanales',
         title: 'Alfajores Tradicionales'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.24.53 PM.jpeg',
+        src: '/assets/gallery_image_1.jpeg',
         alt: 'Alfajores con dulce de leche',
         title: 'Con Dulce de Leche'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.24.54 PM.jpeg',
+        src: '/assets/gallery_image_2.jpeg',
         alt: 'Alfajores con membrillo',
         title: 'Con Membrillo'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.24.55 PM.jpeg',
+        src: '/assets/gallery_image_3.jpeg',
         alt: 'Alfajores con batata',
         title: 'Con Batata'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.01 PM.jpeg',
+        src: '/assets/gallery_image_4.jpeg',
         alt: 'Variedad de alfajores',
         title: 'Variedad Especial'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.07 PM.jpeg',
+        src: '/assets/gallery_image_5.jpeg',
         alt: 'Alfajores frescos',
         title: 'Recién Horneados'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.10 PM.jpeg',
+        src: '/assets/gallery_image_6.jpeg',
         alt: 'Presentación elegante',
         title: 'Presentación Especial'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.12 PM.jpeg',
+        src: '/assets/gallery_image_9.jpeg',
         alt: 'Alfajores dorados',
         title: 'Dorado Perfecto'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.12 PM (1).jpeg',
+        src: '/assets/gallery_image_7.jpeg',
         alt: 'Textura perfecta',
         title: 'Textura Artesanal'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.14 PM.jpeg',
+        src: '/assets/gallery_image_10.jpeg',
         alt: 'Alfajores premium',
         title: 'Calidad Premium'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.15 PM.jpeg',
+        src: '/assets/gallery_image_12.jpeg',
         alt: 'Alfajores caseros',
         title: 'Hechos en Casa'
     },
     {
-        src: '/assets/WhatsApp Image 2025-09-04 at 8.25.16 PM.jpeg',
+        src: '/assets/gallery_image_13.jpeg',
         alt: 'Alfajores tradicionales',
         title: 'Receta Tradicional'
     }
