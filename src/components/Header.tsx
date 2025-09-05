@@ -70,9 +70,12 @@ export function Header() {
 
           {/* CTA Button & Mobile Menu Button */}
           <div className="flex items-center space-x-4">
-            <button className="hidden sm:block bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2.5 rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+            <a 
+              href="#products"
+              className="hidden sm:block bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2.5 rounded-full font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
               Pedir Ahora
-            </button>
+            </a>
             
             {/* Mobile Menu Button */}
             <button
@@ -105,9 +108,12 @@ export function Header() {
               <a href="#contact" className="text-foreground hover:text-primary transition-colors py-2">
                 Contacto
               </a>
-              <button className="bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2.5 rounded-full font-semibold mt-4 w-full">
+              <a 
+                href="#products"
+                className="bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-2.5 rounded-full font-semibold mt-4 w-full text-center block"
+              >
                 Pedir Ahora
-              </button>
+              </a>
             </nav>
           </div>
         )}

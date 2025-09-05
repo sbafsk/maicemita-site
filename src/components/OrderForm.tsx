@@ -23,6 +23,7 @@ interface Product {
     available: boolean
   }>
   inStock: boolean
+  category: string
 }
 
 interface Flavor {
@@ -81,15 +82,15 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
         <div className="bg-card border border-border rounded-lg p-8 max-w-md w-full">
           <div className="text-center space-y-4">
             <div className="text-6xl">✅</div>
-            <h2 className="text-2xl font-bold text-foreground">Order Submitted!</h2>
+            <h2 className="text-2xl font-bold text-foreground">¡Pedido Enviado!</h2>
             <p className="text-muted-foreground">
-              Thank you for your order! We&apos;ll contact you soon to confirm the details and arrange delivery.
+              ¡Gracias por tu pedido! Te contactaremos pronto para confirmar los detalles y coordinar la entrega.
             </p>
             <button
               onClick={onClose}
               className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
             >
-              Close
+              Cerrar
             </button>
           </div>
         </div>
@@ -103,7 +104,7 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
         <div className="space-y-6">
           {/* Header */}
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-foreground">Place Your Order</h2>
+            <h2 className="text-2xl font-bold text-foreground">Realizar Pedido</h2>
             <button
               onClick={onClose}
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -115,13 +116,13 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
 
           {/* Order Summary */}
           <div className="bg-muted rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">Order Summary</h3>
+            <h3 className="font-semibold text-foreground mb-2">Resumen del Pedido</h3>
             <div className="space-y-1 text-sm text-muted-foreground">
-              <div><strong>Product:</strong> {product.name}</div>
-              <div><strong>Flavor:</strong> {flavor.name}</div>
-              <div><strong>Size:</strong> {boxSize.name} ({boxSize.quantity} pieces)</div>
+              <div><strong>Producto:</strong> {product.name}</div>
+              <div><strong>Sabor:</strong> {flavor.name}</div>
+              <div><strong>Tamaño:</strong> {boxSize.name} ({boxSize.quantity} alfajores)</div>
               <div className="pt-2 border-t border-border">
-                <strong className="text-foreground text-lg">Total: ${boxSize.price}</strong>
+                <strong className="text-foreground text-lg">Total: ${boxSize.price} {product.currency}</strong>
               </div>
             </div>
           </div>
@@ -130,7 +131,7 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label htmlFor="customerName" className="block text-sm font-medium text-foreground mb-2">
-                Full Name *
+                Nombre Completo *
               </label>
               <input
                 type="text"
@@ -140,13 +141,13 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
                 onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border border-input rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
-                placeholder="Enter your full name"
+                placeholder="Ingresa tu nombre completo"
               />
             </div>
 
             <div>
               <label htmlFor="customerEmail" className="block text-sm font-medium text-foreground mb-2">
-                Email Address *
+                Correo Electrónico *
               </label>
               <input
                 type="email"
@@ -156,13 +157,13 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
                 onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border border-input rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
-                placeholder="Enter your email address"
+                placeholder="Ingresa tu correo electrónico"
               />
             </div>
 
             <div>
               <label htmlFor="customerPhone" className="block text-sm font-medium text-foreground mb-2">
-                Phone Number *
+                Número de Teléfono *
               </label>
               <input
                 type="tel"
@@ -172,13 +173,13 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
                 onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border border-input rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
-                placeholder="Enter your phone number"
+                placeholder="Ingresa tu número de teléfono"
               />
             </div>
 
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                Special Instructions (Optional)
+                Instrucciones Especiales (Opcional)
               </label>
               <textarea
                 id="message"
@@ -187,7 +188,7 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
                 onChange={handleInputChange}
                 rows={3}
                 className="w-full px-3 py-2 border border-input rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent resize-none"
-                placeholder="Any special delivery instructions or preferences..."
+                placeholder="Instrucciones especiales de entrega o preferencias..."
               />
             </div>
 
@@ -198,21 +199,21 @@ export function OrderForm({ product, flavor, boxSize, onClose }: OrderFormProps)
                 onClick={onClose}
                 className="flex-1 px-6 py-3 border border-border rounded-lg text-foreground hover:bg-muted transition-colors"
               >
-                Cancel
+                Cancelar
               </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="flex-1 bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {isSubmitting ? 'Submitting...' : 'Submit Order'}
+                {isSubmitting ? 'Enviando...' : 'Enviar Pedido'}
               </button>
             </div>
           </form>
 
           {/* Note */}
           <div className="text-sm text-muted-foreground bg-muted p-3 rounded-lg">
-            <p><strong>Note:</strong> This is a contact form. We&apos;ll reach out to you to confirm your order details and arrange delivery. No payment is required at this time.</p>
+            <p><strong>Nota:</strong> Este es un formulario de contacto. Te contactaremos para confirmar los detalles de tu pedido y coordinar la entrega. No se requiere pago en este momento.</p>
           </div>
         </div>
       </div>

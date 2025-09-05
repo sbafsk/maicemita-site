@@ -19,6 +19,7 @@ interface Product {
     available: boolean
   }>
   inStock: boolean
+  category: string
 }
 
 interface ProductCardProps {
@@ -48,10 +49,10 @@ export function ProductCard({ product, onSelect, isSelected = false }: ProductCa
         {/* Price Range */}
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold text-primary">
-            ${Math.min(...product.boxSizes.map(size => size.price))} - ${Math.max(...product.boxSizes.map(size => size.price))}
+            ${Math.min(...product.boxSizes.map(size => size.price))} - ${Math.max(...product.boxSizes.map(size => size.price))} {product.currency}
           </span>
           <span className="text-sm text-muted-foreground">
-            {product.boxSizes.length} sizes
+            {product.boxSizes.length} tamaños
           </span>
         </div>
 

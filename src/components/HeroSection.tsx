@@ -49,9 +49,12 @@ export function HeroSection() {
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
-                            <button className="glass-button text-white px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-glow">
+                            <a 
+                                href="#products"
+                                className="glass-button text-white px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-glow"
+                            >
                                 Ver Productos
-                            </button>
+                            </a>
                             <button className="glass-effect text-dark-gray px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-soft border border-white/30">
                                 Nuestra Historia
                             </button>
