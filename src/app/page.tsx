@@ -17,7 +17,7 @@ export default function Home() {
               Nuestros Productos
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Alfajores artesanales hechos con amor y los mejores ingredientes. 
+              Alfajores artesanales hechos con amor y los mejores ingredientes.
               Elige tu sabor favorito y el tamaño perfecto para cada ocasión.
             </p>
           </div>
