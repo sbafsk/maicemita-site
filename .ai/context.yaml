@@ -1,0 +1,112 @@
+# Maicemita Site - Master AI Context
+# This file provides comprehensive context for AI agents working on this project
+
+project:
+  name: "Maicemita Site"
+  type: "e-commerce"
+  description: "Beautiful e-commerce site for homemade alfajores de maicena"
+  business_owner: "Sister (family business)"
+  developer: "You (technical implementation)"
+  
+mission:
+  primary: "Create a fast, mobile-friendly website that beautifully showcases homemade alfajores and makes it easy for customers to place orders"
+  target_audience: "Local customers interested in homemade desserts, sweet pastries, and authentic flavors"
+  focus: "Mobile users and social media-driven traffic"
+
+current_status:
+  phase: "Planning & Documentation"
+  completion_percentage: 5
+  last_updated: "2025-01-27"
+  next_priority: "Complete documentation structure and prepare for MVP development"
+
+tech_stack:
+  frontend: "Next.js 15 + TypeScript + TailwindCSS + shadcn/ui"
+  backend: "Next.js API Routes"
+  database: "Vercel Postgres (MVP)"
+  deployment: "Vercel with automatic deployments"
+  testing: "Jest + React Testing Library"
+  monitoring: "Vercel Analytics"
+
+key_features:
+  mvp:
+    - "Beautiful Product Showcase - High-quality images and descriptions"
+    - "Box Size Selection - Small, medium, and large box options"
+    - "Flavor Selection - Dulce de leche, membrillo, and batata flavors"
+    - "Simple Ordering - Easy contact form for orders"
+    - "Mobile-First Design - Optimized for mobile users"
+    - "Fast Loading - SEO optimized with static site generation"
+  
+  phase2:
+    - "Online Payment Integration - Stripe payment processing"
+    - "Inventory Management - Track available products"
+    - "Order Tracking System - Customer order status updates"
+    - "Customer Reviews - Testimonials and feedback system"
+    - "Social Media Integration - Share products on social platforms"
+
+product_info:
+  business_name: "Maicemita"
+  product: "Homemade alfajores de maicena"
+  box_sizes:
+    small: "6 alfajores"
+    medium: "12 alfajores"
+    large: "24 alfajores"
+  flavors:
+    dulce_de_leche: "Classic sweet milk caramel"
+    membrillo: "Traditional quince paste"
+    batata: "Sweet potato filling"
+  ordering: "Contact form with email/phone"
+
+architecture_principles:
+  - "Mobile-First: Optimized for mobile users and social media traffic"
+  - "Fast Loading: Static site generation with optimized images"
+  - "Simple UX: Easy navigation and ordering process"
+  - "Beautiful Design: Showcase products with high-quality visuals"
+
+development_standards:
+  code_style: "Follow standards/coding.md for all code generation"
+  documentation: "Update-first policy - check and update existing docs before creating new ones"
+  testing: "Maintain 80% component test coverage"
+  performance: "Load time < 2 seconds, response time < 500ms"
+  accessibility: "WCAG 2.1 AA compliance"
+
+file_structure:
+  docs: "Project documentation - single source of truth"
+  standards: "Immutable coding and design standards"
+  ai_context: "AI-specific configuration and instructions"
+  cursor_config: "MCP server configuration for AI assistance"
+
+ai_guidelines:
+  context_loading: "Always load this context file first for project understanding"
+  documentation_approach: "Use single source of truth - avoid duplicating information"
+  code_generation: "Follow TypeScript standards and React best practices"
+  testing: "Generate tests for all components and API routes"
+  mobile_first: "Prioritize mobile experience in all implementations"
+  business_focus: "Keep user experience simple and conversion-focused"
+
+current_priorities:
+  - "Set up Next.js project with TypeScript and TailwindCSS"
+  - "Implement UI designs for product showcase and ordering"
+  - "Create product gallery with box sizes and flavors"
+  - "Implement contact/order form with validation"
+  - "Ensure mobile-responsive design and performance"
+  - "Deploy to Vercel and configure custom domain"
+
+success_metrics:
+  performance: "Load time < 2 seconds, Lighthouse score > 90"
+  business: "5% conversion rate, 10-20 orders per week initially"
+  technical: "80% test coverage, 99.9% uptime"
+  user_experience: "Mobile-optimized, intuitive ordering process"
+
+constraints:
+  timeline: "2-3 weeks for MVP"
+  budget: "Minimal - using free Vercel tier initially"
+  maintenance: "Simple updates and content management"
+  scalability: "Easy to add features as business grows"
+
+related_files:
+  project_overview: "docs/index.md"
+  current_status: "docs/status/progress.yaml"
+  system_architecture: "docs/architecture/overview.md"
+  setup_guide: "docs/guides/setup.md"
+  coding_standards: "standards/coding.md"
+  agent_instructions: ".ai/agent-instructions.md"

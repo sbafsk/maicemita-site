@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "maicemita-docs": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/sbafsk/apps/maicemita-site/docs"
+      ],
+      "env": {
+        "ALLOWED_DIRECTORIES": "/home/sbafsk/apps/maicemita-site/docs"
+      }
+    },
+    "maicemita-standards": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/sbafsk/apps/maicemita-site/standards"
+      ],
+      "env": {
+        "ALLOWED_DIRECTORIES": "/home/sbafsk/apps/maicemita-site/standards"
+      }
+    },
+    "maicemita-ai-context": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/sbafsk/apps/maicemita-site/.ai"
+      ],
+      "env": {
+        "ALLOWED_DIRECTORIES": "/home/sbafsk/apps/maicemita-site/.ai"
+      }
+    },
+    "maicemita-root": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "/home/sbafsk/apps/maicemita-site"
+      ],
+      "env": {
+        "ALLOWED_DIRECTORIES": "/home/sbafsk/apps/maicemita-site"
+      }
+    }
+  }
+}
