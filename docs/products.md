@@ -51,7 +51,6 @@ Bomba
 
 👉 En resumen, entre ambos catálogos aparecen 6 productos principales:
 
-Choco Bomba
 
 Classic Membrillo
 
@@ -59,6 +58,12 @@ Classic Batata
 
 Alfajores de Copetín
 
-Classic (Maicemita Premium)
+Classic Dulce de leche
 
-Bomba (Maicemita Premium)
+Bomba Extra Dulce de leche
+
+Choco Bomba Negro
+
+Choco Bomba Blanco
+
+
