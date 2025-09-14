@@ -1,10 +1,8 @@
 📋 Productos
 📦 Catálogo 1
 
-Nota: Los precios y productos de esta página provienen de docs/data/products.yaml (fuente única de verdad).
-
 Choco Bomba
-(Bomba con cobertura de chocolate blanco y negro)
+(Bomba con cobertura de chocolate blanco/negro)
 
 1 x $75
 
@@ -51,7 +49,7 @@ Bomba
 
 12 x $640
 
-👉 En resumen, entre ambos catálogos aparecen 7 productos principales:
+👉 En resumen, entre ambos catálogos aparecen 6 productos principales:
 
 
 Classic Membrillo
