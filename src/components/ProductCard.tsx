@@ -1,40 +1,23 @@
-interface Product {
-  id: string
-  name: string
-  description: string
-  basePrice: number
-  currency: string
-  images: string[]
-  flavors: Array<{
-    id: string
-    name: string
-    description: string
-    available: boolean
-  }>
-  boxSizes: Array<{
-    id: string
-    name: string
-    quantity: number
-    price: number
-    available: boolean
-  }>
-  inStock: boolean
-  category: string
+import React, { memo, useCallback } from 'react';
+import { IProduct } from '@/types';
+
+interface IProductCardProps {
+  product: IProduct;
+  onSelect: (product: IProduct) => void;
+  isSelected?: boolean;
+  className?: string;
 }
 
-interface ProductCardProps {
-  product: Product
-  onSelect: (product: Product) => void
-  isSelected?: boolean
-}
-
-export function ProductCard({ product, onSelect, isSelected = false }: ProductCardProps) {
+export const ProductCard = memo<IProductCardProps>(({ product, onSelect, isSelected = false, className }) => {
+  const handleSelect = useCallback(() => {
+    onSelect(product);
+  }, [onSelect, product]);
   return (
     <div
       className={`bg-card border rounded-lg p-6 cursor-pointer transition-all hover:shadow-lg ${
         isSelected ? 'border-primary ring-2 ring-primary/20' : 'border-border hover:border-primary/50'
-      }`}
-      onClick={() => onSelect(product)}
+      } ${className || ''}`}
+      onClick={handleSelect}
     >
       {/* Product Image */}
       <div className="aspect-square bg-muted rounded-lg mb-4 flex items-center justify-center">
@@ -49,7 +32,7 @@ export function ProductCard({ product, onSelect, isSelected = false }: ProductCa
         {/* Price Range */}
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold text-primary">
-            ${Math.min(...product.boxSizes.map(size => size.price))} - ${Math.max(...product.boxSizes.map(size => size.price))} {product.currency}
+            ${Math.min(...product.boxSizes.map(size => size.priceARS))} - ${Math.max(...product.boxSizes.map(size => size.priceARS))} {product.currency}
           </span>
           <span className="text-sm text-muted-foreground">
             {product.boxSizes.length} tamaños
@@ -58,7 +41,7 @@ export function ProductCard({ product, onSelect, isSelected = false }: ProductCa
 
         {/* Flavors */}
         <div className="space-y-1">
-          <div className="text-sm font-medium text-foreground">Available Flavors:</div>
+          <div className="text-sm font-medium text-foreground">Sabores Disponibles:</div>
           <div className="flex flex-wrap gap-1">
             {product.flavors.slice(0, 3).map((flavor) => (
               <span
@@ -70,7 +53,7 @@ export function ProductCard({ product, onSelect, isSelected = false }: ProductCa
             ))}
             {product.flavors.length > 3 && (
               <span className="text-xs text-muted-foreground">
-                +{product.flavors.length - 3} more
+                +{product.flavors.length - 3} más
               </span>
             )}
           </div>
@@ -79,13 +62,15 @@ export function ProductCard({ product, onSelect, isSelected = false }: ProductCa
         {/* Stock Status */}
         <div className="flex items-center justify-between">
           <span className={`text-sm font-medium ${product.inStock ? 'text-green-600' : 'text-destructive'}`}>
-            {product.inStock ? 'In Stock' : 'Out of Stock'}
+            {product.inStock ? 'Disponible' : 'Agotado'}
           </span>
           <span className="text-sm text-muted-foreground">
-            {product.boxSizes.reduce((acc, size) => acc + size.quantity, 0)} total pieces
+            {product.boxSizes.reduce((acc, size) => acc + size.quantity, 0)} piezas totales
           </span>
         </div>
       </div>
     </div>
-  )
-}
+  );
+});
+
+ProductCard.displayName = 'ProductCard';
