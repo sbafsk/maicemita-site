@@ -1,11 +1,13 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { ProductCard } from './ProductCard'
-import { OrderForm } from './OrderForm'
+import React, { useState, useMemo, useCallback, memo } from 'react';
+import { ProductCard } from './ProductCard';
+import { OrderForm } from './OrderForm';
+import { IProduct } from '@/types';
+import { BusinessErrorBoundary } from './ErrorBoundaries';
 
 // Product data based on products.md - Real catalog
-const products = [
+const products: IProduct[] = [
   {
     id: '1',
     name: 'Choco Bomba',
@@ -18,12 +20,12 @@ const products = [
       { id: '2', name: 'Chocolate Negro', description: 'Cobertura de chocolate negro intenso', available: true }
     ],
     boxSizes: [
-      { id: '1', name: 'Individual', quantity: 1, price: 75, available: true },
-      { id: '2', name: 'Caja de 6', quantity: 6, price: 435, available: true },
-      { id: '3', name: 'Caja de 12', quantity: 12, price: 800, available: true }
+      { id: '1', name: 'Individual', quantity: 1, priceARS: 75 },
+      { id: '2', name: 'Caja de 6', quantity: 6, priceARS: 435 },
+      { id: '3', name: 'Caja de 12', quantity: 12, priceARS: 800 }
     ],
     inStock: true,
-    category: 'Catálogo 1'
+    category: 'cookies' as const
   },
   {
     id: '2',
@@ -36,12 +38,12 @@ const products = [
       { id: '1', name: 'Membrillo', description: 'Tradicional pasta de membrillo casera', available: true }
     ],
     boxSizes: [
-      { id: '1', name: 'Individual', quantity: 1, price: 40, available: true },
-      { id: '2', name: 'Caja de 6', quantity: 6, price: 230, available: true },
-      { id: '3', name: 'Caja de 12', quantity: 12, price: 430, available: true }
+      { id: '1', name: 'Individual', quantity: 1, priceARS: 40 },
+      { id: '2', name: 'Caja de 6', quantity: 6, priceARS: 230 },
+      { id: '3', name: 'Caja de 12', quantity: 12, priceARS: 430 }
     ],
     inStock: true,
-    category: 'Catálogo 1'
+    category: 'cookies' as const
   },
   {
     id: '3',
@@ -54,12 +56,12 @@ const products = [
       { id: '1', name: 'Batata', description: 'Dulce relleno de batata natural', available: true }
     ],
     boxSizes: [
-      { id: '1', name: 'Individual', quantity: 1, price: 42, available: true },
-      { id: '2', name: 'Caja de 6', quantity: 6, price: 250, available: true },
-      { id: '3', name: 'Caja de 12', quantity: 12, price: 460, available: true }
+      { id: '1', name: 'Individual', quantity: 1, priceARS: 42 },
+      { id: '2', name: 'Caja de 6', quantity: 6, priceARS: 250 },
+      { id: '3', name: 'Caja de 12', quantity: 12, priceARS: 460 }
     ],
     inStock: true,
-    category: 'Catálogo 1'
+    category: 'cookies' as const
   },
   {
     id: '4',
@@ -72,10 +74,10 @@ const products = [
       { id: '1', name: 'Dulce de Leche', description: 'Clásico dulce de leche cremoso', available: true }
     ],
     boxSizes: [
-      { id: '1', name: 'Caja de 50', quantity: 50, price: 1050, available: true }
+      { id: '1', name: 'Caja de 50', quantity: 50, priceARS: 1050 }
     ],
     inStock: true,
-    category: 'Catálogo 1'
+    category: 'cookies' as const
   },
   {
     id: '5',
@@ -88,12 +90,12 @@ const products = [
       { id: '1', name: 'Dulce de Leche Premium', description: 'Dulce de leche artesanal premium', available: true }
     ],
     boxSizes: [
-      { id: '1', name: 'Individual', quantity: 1, price: 45, available: true },
-      { id: '2', name: 'Caja de 6', quantity: 6, price: 270, available: true },
-      { id: '3', name: 'Caja de 12', quantity: 12, price: 500, available: true }
+      { id: '1', name: 'Individual', quantity: 1, priceARS: 45 },
+      { id: '2', name: 'Caja de 6', quantity: 6, priceARS: 270 },
+      { id: '3', name: 'Caja de 12', quantity: 12, priceARS: 500 }
     ],
     inStock: true,
-    category: 'Catálogo 2 - Maicemita Premium'
+    category: 'cakes' as const
   },
   {
     id: '6',
@@ -106,43 +108,58 @@ const products = [
       { id: '1', name: 'Extra Dulce de Leche', description: 'Generosa cantidad de dulce de leche premium', available: true }
     ],
     boxSizes: [
-      { id: '1', name: 'Individual', quantity: 1, price: 60, available: true },
-      { id: '2', name: 'Caja de 6', quantity: 6, price: 350, available: true },
-      { id: '3', name: 'Caja de 12', quantity: 12, price: 640, available: true }
+      { id: '1', name: 'Individual', quantity: 1, priceARS: 60 },
+      { id: '2', name: 'Caja de 6', quantity: 6, priceARS: 350 },
+      { id: '3', name: 'Caja de 12', quantity: 12, priceARS: 640 }
     ],
     inStock: true,
-    category: 'Catálogo 2 - Maicemita Premium'
+    category: 'cakes' as const
   }
 ]
 
-export function ProductShowcase() {
-  const [selectedProduct, setSelectedProduct] = useState(products[0])
-  const [selectedFlavor, setSelectedFlavor] = useState<string>('')
-  const [selectedBoxSize, setSelectedBoxSize] = useState<string>('')
-  const [showOrderForm, setShowOrderForm] = useState(false)
+export const ProductShowcase = memo(() => {
+  const [selectedProduct, setSelectedProduct] = useState(products[0]);
+  const [selectedFlavor, setSelectedFlavor] = useState<string>('');
+  const [selectedBoxSize, setSelectedBoxSize] = useState<string>('');
+  const [showOrderForm, setShowOrderForm] = useState(false);
 
-  const handleProductSelect = (product: typeof products[0]) => {
-    setSelectedProduct(product)
-    setSelectedFlavor('')
-    setSelectedBoxSize('')
-    setShowOrderForm(false)
-  }
+  const handleProductSelect = useCallback((product: IProduct) => {
+    setSelectedProduct(product);
+    setSelectedFlavor('');
+    setSelectedBoxSize('');
+    setShowOrderForm(false);
+  }, []);
 
-  const handleOrder = () => {
+  const handleOrder = useCallback(() => {
     if (selectedFlavor && selectedBoxSize) {
-      setShowOrderForm(true)
+      setShowOrderForm(true);
     }
-  }
+  }, [selectedFlavor, selectedBoxSize]);
 
-  const selectedBoxSizeData = selectedProduct.boxSizes.find(size => size.id === selectedBoxSize)
-  const selectedFlavorData = selectedProduct.flavors.find(flavor => flavor.id === selectedFlavor)
+  const selectedBoxSizeData = useMemo(
+    () => selectedProduct.boxSizes.find(size => size.id === selectedBoxSize),
+    [selectedProduct.boxSizes, selectedBoxSize]
+  );
+
+  const selectedFlavorData = useMemo(
+    () => selectedProduct.flavors.find(flavor => flavor.id === selectedFlavor),
+    [selectedProduct.flavors, selectedFlavor]
+  );
 
   // Group products by category
-  const catalog1Products = products.filter(p => p.category === 'Catálogo 1')
-  const catalog2Products = products.filter(p => p.category === 'Catálogo 2 - Maicemita Premium')
+  const cookiesProducts = useMemo(
+    () => products.filter(p => p.category === 'cookies'),
+    []
+  );
+
+  const cakesProducts = useMemo(
+    () => products.filter(p => p.category === 'cakes'),
+    []
+  );
 
   return (
-    <div id="products" className="space-y-16">
+    <BusinessErrorBoundary>
+      <div id="products" className="space-y-16">
       {/* Catálogo 1 */}
       <div className="space-y-8">
         <div className="text-center">
@@ -150,7 +167,7 @@ export function ProductShowcase() {
           <p className="text-muted-foreground">Nuestros alfajores tradicionales artesanales</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {catalog1Products.map((product) => (
+          {cookiesProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -168,7 +185,7 @@ export function ProductShowcase() {
           <p className="text-muted-foreground">Línea premium con ingredientes selectos</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {catalog2Products.map((product) => (
+          {cakesProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -201,7 +218,7 @@ export function ProductShowcase() {
                   {selectedProduct.flavors.map((flavor) => (
                     <button
                       key={flavor.id}
-                      onClick={() => setSelectedFlavor(flavor.id)}
+                      onClick={useCallback(() => setSelectedFlavor(flavor.id), [flavor.id])}
                       className={`p-4 rounded-lg border text-left transition-all ${
                         selectedFlavor === flavor.id
                           ? 'border-primary bg-primary/10 text-primary'
@@ -222,7 +239,7 @@ export function ProductShowcase() {
                   {selectedProduct.boxSizes.map((boxSize) => (
                     <button
                       key={boxSize.id}
-                      onClick={() => setSelectedBoxSize(boxSize.id)}
+                      onClick={useCallback(() => setSelectedBoxSize(boxSize.id), [boxSize.id])}
                       className={`p-4 rounded-lg border text-left transition-all ${
                         selectedBoxSize === boxSize.id
                           ? 'border-primary bg-primary/10 text-primary'
@@ -234,7 +251,7 @@ export function ProductShowcase() {
                           <div className="font-medium">{boxSize.name}</div>
                           <div className="text-sm text-muted-foreground">{boxSize.quantity} alfajores</div>
                         </div>
-                        <div className="font-bold text-lg">${boxSize.price} ARS</div>
+                        <div className="font-bold text-lg">${boxSize.priceARS} ARS</div>
                       </div>
                     </button>
                   ))}
@@ -250,7 +267,7 @@ export function ProductShowcase() {
                     <div>Sabor: {selectedFlavorData.name}</div>
                     <div>Tamaño: {selectedBoxSizeData.name} ({selectedBoxSizeData.quantity} alfajores)</div>
                     <div className="font-bold text-foreground text-lg mt-2">
-                      Total: ${selectedBoxSizeData.price} ARS
+                      Total: ${selectedBoxSizeData.priceARS} ARS
                     </div>
                   </div>
                 </div>
@@ -275,9 +292,12 @@ export function ProductShowcase() {
           product={selectedProduct}
           flavor={selectedFlavorData!}
           boxSize={selectedBoxSizeData!}
-          onClose={() => setShowOrderForm(false)}
+          onClose={useCallback(() => setShowOrderForm(false), [])}
         />
       )}
-    </div>
-  )
-}
+      </div>
+    </BusinessErrorBoundary>
+  );
+});
+
+ProductShowcase.displayName = 'ProductShowcase';
